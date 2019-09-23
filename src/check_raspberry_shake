@@ -6,7 +6,7 @@ use warnings;
 use utf8;
 use 5.016000;
 
-BEGIN { our $VERSION = v0.0.1; }
+BEGIN { our $VERSION = v0.0.2; }
 
 use Monitoring::Plugin;
 use HTTP::Tiny;
@@ -66,7 +66,7 @@ Readonly::Hash my %LOG => (
 my $mp = Monitoring::Plugin->new(
     usage =>
 q{Usage %s -H <host> [ -f <function> ] [ -t <timeout> ] [ -v|--verbose ] [ -c|--critical=<threshold> ] [ -w|--warning=<threshold> ]},
-    version => v0.0.1,
+    version => v0.0.2,
 );
 
 $mp->add_arg(
@@ -186,6 +186,7 @@ The host
 =head1 OPTIONS
 
 =over 4
+
 =item B< -?, -h, --help>
 
 Show help
@@ -253,7 +254,7 @@ The requested function is not supported, must be one of the system properties
 
 =head1 EXAMPLES
 
-C<check_raspberry_shake -H rs.local -f cpu_temp
+C<check_raspberry_shake -H rs.local -f cpu_temp>
 
 =head1 DEPENDENCIES
 

@@ -17,34 +17,36 @@ The host
 
 # OPTIONS
 
-> Show help
->
-> ** -v, --verbose**
->
-> Be more verbose
->
-> **--version**
->
-> Show version and license
->
-> **--function**
->
-> Check for function:
->
-> - status: Running or not
-> - version: System software version, default warns if not 0.15
-> - producer: Data Producer on or not
-> - consumer: Data Consumer on or not
-> - forwarding: Data Forwarding on or not
-> - connected: Server Connection connected or not
-> - uptime: System uptime in minutes, defaults warning 10
-> critical 5
-> - disk\_available: Disk space available in Mb, defaults warning 500
-> critical 100
-> - disk\_used: Disk space used in percentage, defaults warning 90
-> critical 95
-> - cpu\_temp: CPU temperature in degrees Celcius, defaults warning 80
-> critical 85
+- ** -?, -h, --help**
+
+    Show help
+
+- ** -v, --verbose**
+
+    Be more verbose
+
+- **--version**
+
+    Show version and license
+
+- **--function**
+
+    Check for function:
+
+    - status: Running or not
+    - version: System software version, default warns if not 0.15
+    - producer: Data Producer on or not
+    - consumer: Data Consumer on or not
+    - forwarding: Data Forwarding on or not
+    - connected: Server Connection connected or not
+    - uptime: System uptime in minutes, defaults warning 10
+    critical 5
+    - disk\_available: Disk space available in Mb, defaults warning 500
+    critical 100
+    - disk\_used: Disk space used in percentage, defaults warning 90
+    critical 95
+    - cpu\_temp: CPU temperature in degrees Celcius, defaults warning 80
+    critical 85
 
 # DIAGNOSTICS
 
@@ -133,17 +135,3 @@ RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
 FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGES.
-
-# POD ERRORS
-
-Hey! **The above document had some coding errors, which are explained below:**
-
-- Around line 188:
-
-    &#x3d;over should be: '=over' or '=over positive\_number'
-
-    You can't have =items (as at line 193) unless the first thing after the =over is an =item
-
-- Around line 256:
-
-    Unterminated C<...> sequence
