@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>check_raspberry_shake - check the status of a Raspberry Shake</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Roland van Ipenburg">
+<meta name="description" property="og:description" content="check_raspberry_shake: checks the status of several properties of a Raspberry Shake.">
+<meta name="title" property="og:title" content="check_raspberry_shake - check the status of a Raspberry Shake">
+<meta property="og:type" content="website">
+</head>
+<body>
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#USAGE">USAGE</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#REQUIRED-ARGUMENTS">REQUIRED ARGUMENTS</a></li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#DIAGNOSTICS">DIAGNOSTICS</a></li>
+  <li><a href="#EXAMPLES">EXAMPLES</a></li>
+  <li><a href="#DEPENDENCIES">DEPENDENCIES</a></li>
+  <li><a href="#EXIT-STATUS">EXIT STATUS</a></li>
+  <li><a href="#CONFIGURATION">CONFIGURATION</a></li>
+  <li><a href="#INCOMPATIBILITIES">INCOMPATIBILITIES</a></li>
+  <li><a href="#BUGS-AND-LIMITATIONS">BUGS AND LIMITATIONS</a></li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</a></li>
+  <li><a href="#DISCLAIMER-OF-WARRANTY">DISCLAIMER OF WARRANTY</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>check_raspberry_shake - check the status of a Raspberry Shake</p>
+
+<h1 id="USAGE">USAGE</h1>
+
+<p><b>check_raspberry_shake</b> <b>-H</b> <i>host</i> <b>-f</b> <i>function</i>&hellip;</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p><b>check_raspberry_shake</b> checks the status of several properties of a Raspberry Shake.</p>
+
+<h1 id="REQUIRED-ARGUMENTS">REQUIRED ARGUMENTS</h1>
+
+<p>The host</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="h---help"><b> -?, -h, --help</b></dt>
+<dd>
+
+<p>Show help</p>
+
+</dd>
+<dt id="v---verbose"><b> -v, --verbose</b></dt>
+<dd>
+
+<p>Be more verbose</p>
+
+</dd>
+<dt id="version"><b>--version</b></dt>
+<dd>
+
+<p>Show version and license</p>
+
+</dd>
+<dt id="function"><b>--function</b></dt>
+<dd>
+
+<p>Check for function:</p>
+
+<ul>
+
+<li><p>status: Running or not</p>
+
+</li>
+<li><p>version: System software version, default warns if not 0.15</p>
+
+</li>
+<li><p>producer: Data Producer on or not</p>
+
+</li>
+<li><p>consumer: Data Consumer on or not</p>
+
+</li>
+<li><p>forwarding: Data Forwarding on or not</p>
+
+</li>
+<li><p>connected: Server Connection connected or not</p>
+
+</li>
+<li><p>uptime: System uptime in minutes, defaults warning 10 critical 5</p>
+
+</li>
+<li><p>disk_available: Disk space available in Mb, defaults warning 500 critical 100</p>
+
+</li>
+<li><p>disk_used: Disk space used in percentage, defaults warning 90 critical 95</p>
+
+</li>
+<li><p>cpu_temp: CPU temperature in degrees Celcius, defaults warning 80 critical 85</p>
+
+</li>
+</ul>
+
+</dd>
+</dl>
+
+<h1 id="DIAGNOSTICS">DIAGNOSTICS</h1>
+
+<ul>
+
+<li><p>Could not retrieve page &#39;%s&#39; to get data (E) The resource containing the data could not be retrieved from the host</p>
+
+</li>
+<li><p>Could not get data from resource &#39;%s&#39; for function &#39;%s&#39; (E) The resource containing the data could be retrieved from the host but the requested data was not found in that object</p>
+
+</li>
+<li><p>Unknown function &#39;%s&#39;, must be one of connected, consumer, cpu_temp, disk_available, disk_used, forwarding, producer, status, uptime, version (E) The requested function is not supported, must be one of the system properties &#39;connected&#39;, &#39;consumer&#39;, &#39;cpu_temp&#39;, &#39;disk_available&#39;, &#39;disk_used&#39;, &#39;forwarding&#39;, &#39;producer&#39;, &#39;status&#39;, &#39;uptime&#39; or &#39;version&#39;.</p>
+
+</li>
+</ul>
+
+<h1 id="EXAMPLES">EXAMPLES</h1>
+
+<p><code>check_raspberry_shake -H rs.local -f cpu_temp</code></p>
+
+<h1 id="DEPENDENCIES">DEPENDENCIES</h1>
+
+<p>Perl 5.16.0, Monitoring::Plugin, HTTP::Tiny, JSON, List::MoreUtils, Readonly, English</p>
+
+<h1 id="EXIT-STATUS">EXIT STATUS</h1>
+
+<p>The exist status is handled by the monitoring interface.</p>
+
+<h1 id="CONFIGURATION">CONFIGURATION</h1>
+
+<p>The default warning and critical thresholds should be overridden by the standard -w and -c options of the monitoring interface because they depend on the usage of the device. The defaults thresholds are:</p>
+
+<ul>
+
+<li><p>uptime 10: 1:</p>
+
+</li>
+<li><p>disk_available 500: 100:</p>
+
+</li>
+<li><p>disk_used 90 95</p>
+
+</li>
+<li><p>cpu_temp 80: 85:</p>
+
+</li>
+</ul>
+
+<h1 id="INCOMPATIBILITIES">INCOMPATIBILITIES</h1>
+
+<p>There are no known incompatibilities but since the data is retrieved from an API in an undefined format, a different system software version could present the data in a different format which might break things. It is compatible with system software version <code>0.15</code>.</p>
+
+<h1 id="BUGS-AND-LIMITATIONS">BUGS AND LIMITATIONS</h1>
+
+<p>The &#39;status&#39; function only determines between &#39;RUNNING&#39; and not.</p>
+
+<p>The &#39;producer&#39;, &#39;consumer&#39;, &#39;forwarding&#39; and &#39;connected&#39; functions only determines between &#39;ON&#39;/&#39;CONNECTED&#39; and not.</p>
+
+<p>Please report any bugs or feature requests at</p>
+
+<p><a href="https://github.com/ipenburg/check_raspberry_shake/issues">Issues for github.com</a>.</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Roland van Ipenburg, &lt;ipenburg@xs4all.nl&gt;</p>
+
+<h1 id="LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</h1>
+
+<p>Copyright 2019 by Roland van Ipenburg This program is free software; you can redistribute it and/or modify it under the GNU General Public License v3.0.</p>
+
+<h1 id="DISCLAIMER-OF-WARRANTY">DISCLAIMER OF WARRANTY</h1>
+
+<p>BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE SOFTWARE &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR, OR CORRECTION.</p>
+
+<p>IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENSE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+
+</body>
+</html>
